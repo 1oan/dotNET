@@ -1,0 +1,44 @@
+@host = http://localhost:5019
+
+### List books (paged)
+GET {{host}}/books
+Accept: application/json
+
+### Filter by author (contains)
+GET {{host}}/books?author=Ion
+Accept: application/json
+
+### Sort by year desc and paginate
+GET {{host}}/books?sortBy=year&desc=true&page=1&pageSize=2
+Accept: application/json
+
+### Invalid sort (should return 400 with problem+json)
+GET {{host}}/books?sortBy=foobar
+Accept: application/json
+
+### Create a book
+POST {{host}}/books
+Content-Type: application/json
+
+{
+  "title": "Clean Architecture",
+  "author": "Robert C. Martin",
+  "year": 2017
+}
+
+### Get by id
+GET {{host}}/books/1
+Accept: application/json
+
+### Update a book
+PUT {{host}}/books/1
+Content-Type: application/json
+
+{
+  "title": "Clean Architecture (2nd)",
+  "author": "Robert C. Martin",
+  "year": 2017
+}
+
+### Delete a book
+DELETE {{host}}/books/1
